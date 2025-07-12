@@ -17,7 +17,7 @@ export function Home() {
       <Content>
         <Text style={{ marginBottom: 20, fontSize: theme.fontSizes.xxl }}>Wallet Test</Text>
         <Button label="meus cartões" onPress={() => navigation.navigate('WalletList')} />
-        <Button primary={false} label="cadastrar cartão" onPress={() => navigation.navigate('RegisterWallet')} />
+        <Button variant="secondary" label="cadastrar cartão" onPress={() => navigation.navigate('RegisterWallet')} />
       </Content>
     </Container>
   )

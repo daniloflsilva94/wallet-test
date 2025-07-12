@@ -1,19 +1,21 @@
 import { Btn, BtnText } from "./styles";
 
+export type ButtonVariant = 'primary' | 'secondary';
+
 type ButtonProps = {
-  primary?: boolean;
+  variant?: ButtonVariant;
   label: string;
   onPress: () => void;
 };
 
 export function Button({
-  primary = true,
+  variant = 'primary',
   label,
   onPress
 }: ButtonProps) {
   return (
-    <Btn primary={primary} onPress={onPress}>
-      <BtnText primary={primary}>{label}</BtnText>
+    <Btn variant={variant} onPress={onPress}>
+      <BtnText variant={variant}>{label}</BtnText>
     </Btn>
   );
 }
