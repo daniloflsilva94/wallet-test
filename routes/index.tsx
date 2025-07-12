@@ -1,9 +1,13 @@
 import { Home } from '@/screens/home';
+import { RegisterWallet } from '@/screens/register-wallet';
+import { WalletList } from '@/screens/wallet-list';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
 export type RootStackParamList = {
   Home: undefined;
+  RegisterWallet: undefined;
+  WalletList: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -12,6 +16,8 @@ export default function AppRoutes() {
   return (
     <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="RegisterWallet" component={RegisterWallet} />
+      <Stack.Screen name="WalletList" component={WalletList} />
     </Stack.Navigator>
   );
 }
