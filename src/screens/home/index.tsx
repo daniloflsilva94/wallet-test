@@ -1,8 +1,8 @@
-import { Button } from "@/components/button";
-import { Container } from "@/components/container";
-import { RootStackParamList } from "@/routes";
-import { Content, Text } from "@/styles/elements";
-import { theme } from "@/theme/theme";
+import { Button } from "@/src/components/button";
+import { Container } from "@/src/components/container";
+import { RootStackParamList } from "@/src/routes";
+import { Content, Text } from "@/src/styles/elements";
+import { theme } from "@/src/theme/theme";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 

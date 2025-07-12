@@ -1,6 +1,6 @@
-import { Home } from '@/screens/home';
-import { RegisterWallet } from '@/screens/register-wallet';
-import { WalletList } from '@/screens/wallet-list';
+import { Home } from '@/src/screens/home';
+import { RegisterWallet } from '@/src/screens/register-wallet';
+import { WalletList } from '@/src/screens/wallet-list';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 

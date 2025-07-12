@@ -1,4 +1,4 @@
-import { Container } from "@/components/container";
+import { Container } from "@/src/components/container";
 import { Text } from "react-native";
 
 export function WalletList() {
