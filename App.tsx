@@ -5,6 +5,7 @@ import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
+import { AppProvider } from './src/context';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,8 +18,13 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer theme={DefaultTheme}>
-        <StatusBar style="dark" />
-        <AppRoutes />
+        <StatusBar
+          style="dark"
+          backgroundColor="#ffffff"
+        />
+        <AppProvider>
+          <AppRoutes />
+        </AppProvider>
       </NavigationContainer>
     </ThemeProvider>
   );

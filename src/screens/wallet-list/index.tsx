@@ -1,10 +1,19 @@
-import { Container } from "@/src/components/container";
-import { Text } from "react-native";
+import { CardStack } from '@/src/components/card-stack';
+import { Container } from '@/src/components/container';
+import { useWallets } from '@/src/context/wallet';
+import { RootStackParamList } from '@/src/routes';
+import { theme } from '@/src/theme/theme';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'WalletList'>;
 
 export function WalletList() {
+  const navigation = useNavigation<NavigationProp>();
+  const { cards } = useWallets();
+
   return (
-    <Container>
-      <Text>Wallet List!</Text>
-    </Container>
-  );
+    <Container title="Wallet Test" screenName="Meus cartões" backgroundColor={theme.colors.white} onAdd={() => navigation.navigate('RegisterWallet')}>
+      <CardStack cards={cards} />
+    </Container>);
 }

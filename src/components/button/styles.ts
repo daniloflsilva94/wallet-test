@@ -3,7 +3,11 @@ import styled from 'styled-components/native';
 import { ButtonVariant } from '.';
 
 export const Btn = styled.TouchableOpacity<{ variant?: ButtonVariant }>`
-  background-color: ${({ theme, variant }) => variant === 'primary' ? theme.colors.blue_light : theme.colors.green_light};
+  background-color: ${({ theme, variant, disabled }) => {
+    if (disabled) return theme.colors.grey_light;
+    if (variant === 'primary') return theme.colors.blue_light;
+    return theme.colors.green_light;
+  }};
   padding: 10px;
   border-radius: 12px;
   align-items: center;
@@ -15,8 +19,11 @@ export const Btn = styled.TouchableOpacity<{ variant?: ButtonVariant }>`
 `;
 
 export const BtnText = styled(Text) <{ variant?: ButtonVariant }>`
-  color: ${({ theme, variant }) => variant === 'primary' ? theme.colors.white : theme.colors.blue_dark};
+  color: ${({ theme, variant, disabled }) => {
+    if (disabled) return theme.colors.grey;
+    if (variant === 'primary') return theme.colors.white;
+    return theme.colors.blue_dark;
+  }};
   font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: bold;
-  font-family: 'PTSansCaption_400Regular';
+  font-family: ${({ theme }) => theme.fonts.regular};
 `;

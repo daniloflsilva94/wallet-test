@@ -6,16 +6,18 @@ type ButtonProps = {
   variant?: ButtonVariant;
   label: string;
   onPress: () => void;
+  disabled?: boolean;
 };
 
 export function Button({
   variant = 'primary',
   label,
-  onPress
+  onPress,
+  disabled = false,
 }: ButtonProps) {
   return (
-    <Btn variant={variant} onPress={onPress}>
-      <BtnText variant={variant}>{label}</BtnText>
+    <Btn variant={variant} onPress={() => !disabled ? onPress() : {}} disabled={disabled}>
+      <BtnText variant={variant} disabled={disabled}>{label}</BtnText>
     </Btn>
   );
 }

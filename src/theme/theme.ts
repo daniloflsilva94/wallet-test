@@ -4,8 +4,9 @@ export const theme = {
     green_light: '#A5FF32',
     blue_light: '#0CD1F9',
     white: '#ffffff',
-    black: '#000000',
-    grey_light: '#EEEEEE'
+    black: '#111111',
+    grey_light: '#EEEEEE',
+    grey: '#BBBBBB'
   },
   fonts: {
     regular: 'PTSansCaption_400Regular',
@@ -18,5 +19,12 @@ export const theme = {
     lg: 20,
     xl: 28,
     xxl: 32,
+  },
+  spacing: {
+    xs: 4,
+    sm: 8,
+    md: 16,
+    lg: 24,
+    xl: 32,
   },
 };

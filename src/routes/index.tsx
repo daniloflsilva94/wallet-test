@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppRoutes() {
   return (
-    <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, animation: 'none' }}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="RegisterWallet" component={RegisterWallet} />
       <Stack.Screen name="WalletList" component={WalletList} />
