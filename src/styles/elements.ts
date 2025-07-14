@@ -39,7 +39,7 @@ export const ShapeBottom = styled.View`
 export const Label = styled.Text`
   font-size: ${({ theme }) => theme.fontSizes.xs}px;
   color: ${({ theme }) => theme.colors.white};
-  margin-bottom: ${({ theme }) => theme.spacing.xs};
+  margin-bottom: ${({ theme }) => theme.spacing.xs}px;
   font-family: ${({ theme }) => theme.fonts.regular};
 `;
 

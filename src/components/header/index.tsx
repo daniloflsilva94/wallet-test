@@ -21,12 +21,12 @@ export function Header({ title, backgroundColor, onAdd, screenName }: HeaderProp
     <>
       <ContainerHeader backgroundColor={backgroundColor}>
         <ContentHeader>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity onPress={() => navigation.goBack()} testID="header-back-button">
             <MaterialCommunityIcons name="arrow-left" size={26} color={theme.colors.blue_light} />
           </TouchableOpacity>
           <TextHeader backgroundColor={backgroundColor}>{title}</TextHeader>
           {!!onAdd ? (
-            <TouchableOpacity onPress={onAdd}>
+            <TouchableOpacity onPress={onAdd} testID="header-add-button">
               <MaterialCommunityIcons name="plus" size={26} color={theme.colors.blue_light} />
             </TouchableOpacity>
           )

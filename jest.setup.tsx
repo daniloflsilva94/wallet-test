@@ -6,6 +6,19 @@ import { theme } from './src/theme/theme';
 
 export { };
 
+const originalError = console.error;
+console.error = (...args) => {
+  const message = args?.[0];
+
+  if (
+    typeof message === 'string' &&
+    message.includes('not wrapped in act')
+  ) {
+    return;
+  }
+
+  return originalError(...args);
+};
 
 // @ts-ignore
 global.renderWithTheme = (ui: ReactElement, options?: RenderOptions) =>
