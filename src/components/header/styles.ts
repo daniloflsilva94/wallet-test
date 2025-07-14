@@ -41,7 +41,7 @@ export const ContainerTitle = styled.View`
 `;
 
 export const Label = styled.Text`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-size: ${({ theme }) => theme.fontSizes.lg}px;
   color: ${({ theme }) => theme.colors.blue_light};
   font-family: ${({ theme }) => theme.fonts.regular};
 `;

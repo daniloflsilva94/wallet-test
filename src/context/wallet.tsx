@@ -1,34 +1,49 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { Wallet } from "../dto/wallet";
+import { api } from "../services/api";
+
+type AppRoutes = {
+  'Success': { card: Wallet };
+};
 
 interface WalletsContextProps {
   cards: Wallet[];
-  save: (card: Wallet) => void;
+  save: (card: Wallet) => Promise<void>;
+  get: () => Promise<void>;
 }
 
-const WalletsContext = createContext<WalletsContextProps | undefined>(
-  undefined
-);
+const WalletsContext = createContext<WalletsContextProps | undefined>(undefined);
 
 export function WalletProvider({ children }: { children: ReactNode }) {
+  const [cards, setCards] = useState<Wallet[]>([]);
+  const navigation = useNavigation<NavigationProp<AppRoutes>>();
 
-  const [cards] = useState<Wallet[]>([]);
-
-  async function save(card: Wallet) {
+  async function get() {
     try {
-      
+      const response = await api.get('/cards');
+      setCards(response.data);
     } catch (error) {
-      
+      console.error('Erro ao carregar cartões:', error);
     }
   }
 
+  async function save(card: Wallet) {
+    try {
+      const response = await api.post('/cards', card);
+      setCards(prev => [...prev, response.data]);
+      navigation.navigate('Success', { card: response.data });
+    } catch (error) {
+      console.error('Erro ao salvar cartão:', error);
+    }
+  }
+
+  useEffect(() => {
+    get();
+  }, []);
+
   return (
-    <WalletsContext.Provider
-      value={{
-        cards,
-        save
-      }}
-    >
+    <WalletsContext.Provider value={{ cards, save, get }}>
       {children}
     </WalletsContext.Provider>
   );

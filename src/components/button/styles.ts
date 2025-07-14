@@ -24,6 +24,6 @@ export const BtnText = styled(Text) <{ variant?: ButtonVariant }>`
     if (variant === 'primary') return theme.colors.white;
     return theme.colors.blue_dark;
   }};
-  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-size: ${({ theme }) => theme.fontSizes.md}px;
   font-family: ${({ theme }) => theme.fonts.regular};
 `;

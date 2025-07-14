@@ -1,9 +1,8 @@
 import { Wallet } from '@/src/dto/wallet';
-import { maskCardNumber } from '@/src/utils/formatters/card';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Dimensions, TouchableWithoutFeedback, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { CardContainer, Label, Name } from './styles';
+import { Card } from '../card';
 
 const { height } = Dimensions.get('window');
 
@@ -15,7 +14,7 @@ export function CardStack({ cards }: CardStackProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const STACK_SPACING = 70;
-  const TOTAL_STACK_HEIGHT = (cards.length - 1) * STACK_SPACING;
+  const TOTAL_STACK_HEIGHT = (cards?.length - 1) * STACK_SPACING;
 
   const springConfig = {
     damping: 12,
@@ -26,25 +25,36 @@ export function CardStack({ cards }: CardStackProps) {
     restSpeedThreshold: 0.1,
   };
 
+  const sharedTopsRef = useRef<Animated.SharedValue<number>[]>([]);
+  if (sharedTopsRef.current.length !== cards?.length) {
+    sharedTopsRef.current = cards.map((_, index) =>
+      sharedTopsRef.current[index] ?? useSharedValue(index * STACK_SPACING)
+    );
+  }
+
+  useEffect(() => {
+    cards.forEach((_, index) => {
+      const isSelected = selectedId === cards[index].id;
+      const isDimmed = selectedId !== null && selectedId !== cards[index].id;
+
+      sharedTopsRef.current[index].value = withSpring(
+        selectedId
+          ? isSelected
+            ? height / 2 - 200
+            : height * 0.65
+          : height / 4 - TOTAL_STACK_HEIGHT / 2 - 40 + index * STACK_SPACING,
+        springConfig
+      );
+    });
+  }, [selectedId, cards]);
+
   return (
     <View style={{ height: height * 0.9, position: 'relative' }}>
       {cards.map((card, index) => {
         const isSelected = selectedId === card.id;
         const isDimmed = selectedId !== null && selectedId !== card.id;
 
-        const sharedTop = useSharedValue(index * STACK_SPACING);
-
-        if (selectedId) {
-          sharedTop.value = withSpring(
-            isSelected ? height / 2 - 200 : height * 0.65,
-            springConfig
-          );
-        } else {
-          sharedTop.value = withSpring(
-            height / 4 - TOTAL_STACK_HEIGHT / 2 - 40 + index * STACK_SPACING,
-            springConfig
-          );
-        }
+        const sharedTop = sharedTopsRef.current[index];
 
         const animatedStyle = useAnimatedStyle(() => ({
           top: sharedTop.value,
@@ -73,12 +83,7 @@ export function CardStack({ cards }: CardStackProps) {
                 },
               ]}
             >
-              <CardContainer>
-                <Label>{card.type}</Label>
-                <Name>{card.holder}</Name>
-                <Name>{maskCardNumber(card.cardNumber)}</Name>
-                <Name>Validade {card.expiry}</Name>
-              </CardContainer>
+              <Card data={card} />
             </Animated.View>
           </TouchableWithoutFeedback>
         );

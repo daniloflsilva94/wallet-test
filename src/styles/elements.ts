@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const Text = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
-  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-size: ${({ theme }) => theme.fontSizes.md}px;
   color: ${({ theme }) => theme.colors.white};
 `;
 
@@ -37,7 +37,7 @@ export const ShapeBottom = styled.View`
 `;
 
 export const Label = styled.Text`
-  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-size: ${({ theme }) => theme.fontSizes.xs}px;
   color: ${({ theme }) => theme.colors.white};
   margin-bottom: ${({ theme }) => theme.spacing.xs};
   font-family: ${({ theme }) => theme.fonts.regular};
