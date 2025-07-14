@@ -1,7 +1,7 @@
 import { renderWithTheme } from '@/src/utils/test-utils';
 import { fireEvent } from '@testing-library/react-native';
 import React from 'react';
-import { Button } from './index';
+import { Button } from '../button';
 
 describe('Button', () => {
   it('deve renderizar o rótulo corretamente', () => {

@@ -16,7 +16,7 @@ export function Button({
   disabled = false,
 }: ButtonProps) {
   return (
-    <Btn variant={variant} onPress={() => !disabled ? onPress() : {}} disabled={disabled}>
+    <Btn testID="save-button" variant={variant} onPress={() => !disabled ? onPress() : {}} disabled={disabled}>
       <BtnText variant={variant} disabled={disabled}>{label}</BtnText>
     </Btn>
   );

@@ -1,7 +1,7 @@
 import { renderWithTheme } from '@/src/utils/test-utils';
 import { fireEvent } from '@testing-library/react-native';
 import React from 'react';
-import { Input } from './index';
+import { Input } from '../input';
 
 describe('Input', () => {
   it('deve renderizar o label corretamente', () => {

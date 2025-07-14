@@ -1,7 +1,7 @@
 import { maskCardNumber } from '@/src/utils/formatters/card';
 import { renderWithTheme } from '@/src/utils/test-utils';
 import React from 'react';
-import { Card } from './index';
+import { Card } from '../card';
 
 describe('Card', () => {
   it('deve renderizar os dados do cartão', () => {

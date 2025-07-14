@@ -2,7 +2,7 @@ import { Text } from '@/src/styles/elements';
 import { renderWithTheme } from '@/src/utils/test-utils';
 import { fireEvent } from '@testing-library/react-native';
 import React from 'react';
-import { Container } from './index';
+import { Container } from '../container';
 
 describe('Container', () => {
   it('deve renderizar o título no Header', () => {

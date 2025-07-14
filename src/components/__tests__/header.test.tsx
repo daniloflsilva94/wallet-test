@@ -1,7 +1,7 @@
 import { renderWithTheme } from '@/src/utils/test-utils';
 import { fireEvent } from '@testing-library/react-native';
 import React from 'react';
-import { Header } from './index';
+import { Header } from '../header';
 
 jest.mock('@react-navigation/native', () => {
   const actualNav = jest.requireActual('@react-navigation/native');
