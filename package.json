@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "server": "json-server --watch db.json --port 3333",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "jest": {
     "preset": "jest-expo",

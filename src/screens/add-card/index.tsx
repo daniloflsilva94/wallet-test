@@ -6,8 +6,9 @@ import { Content, InputRow, ShapeBottom, ShapeTop, Text } from "@/src/styles/ele
 import { theme } from "@/src/theme/theme";
 import { formatCardNumber, formatSecurityCode } from "@/src/utils/formatters/card";
 import { formatExpiryDate } from "@/src/utils/formatters/date";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
+import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 
 export function AddCard() {
   const { save } = useCards();
@@ -16,6 +17,22 @@ export function AddCard() {
   const [holder, setHolder] = useState<string>("");
   const [expiry, setExpiry] = useState<string>("");
   const [cvv, setCvv] = useState<string>("");
+
+  const shakeAnim = useSharedValue(0);
+
+  useEffect(() => {
+    shakeAnim.value = withSequence(
+      withTiming(10, { duration: 100 }),
+      withTiming(-10, { duration: 100 }),
+      withTiming(6, { duration: 80 }),
+      withTiming(-6, { duration: 80 }),
+      withTiming(0, { duration: 80 })
+    );
+  }, []);
+
+  const shakeStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: shakeAnim.value }],
+  }));
 
   function isValidForm(): boolean {
     return (
@@ -52,7 +69,9 @@ export function AddCard() {
           }}
         >
           <Content>
-            <Text style={{ fontSize: theme.fontSizes.xxl }}>Wallet Test</Text>
+            <Animated.View style={shakeStyle}>
+              <Text style={{ fontSize: theme.fontSizes.xxl, paddingVertical: 20 }}>Wallet Test</Text>
+            </Animated.View>
             <Input
               label="número do cartão"
               placeholder=""

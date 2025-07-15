@@ -48,11 +48,11 @@ export function CardItem({ data, index, order, selectedIndex, onCardReset }: Car
 
     const shake = (baseY: number) =>
       withSequence(
-        withTiming(baseY - 150, { duration: 90 }),
-        withTiming(baseY + 150, { duration: 90 }),
-        withTiming(baseY - 30, { duration: 80 }),
-        withTiming(baseY + 30, { duration: 80 }),
-        withTiming(baseY, { duration: 80 })
+        withTiming(baseY - 10, { duration: 60 }),
+        withTiming(baseY + 10, { duration: 60 }),
+        withTiming(baseY - 6, { duration: 50 }),
+        withTiming(baseY + 6, { duration: 50 }),
+        withTiming(baseY, { duration: 50 })
       );
 
     return {

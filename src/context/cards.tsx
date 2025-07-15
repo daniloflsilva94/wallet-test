@@ -1,7 +1,8 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { Card } from "../dto/card";
 import { api } from "../services/api";
+import { useLoading } from "./loading";
 
 type AppRoutes = {
   'Success': { card: Card };
@@ -16,15 +17,19 @@ interface CardsContextProps {
 const CardsContext = createContext<CardsContextProps | undefined>(undefined);
 
 export function CardsProvider({ children }: { children: ReactNode }) {
+  const { hideLoading, showLoading } = useLoading()
   const [cards, setCards] = useState<Card[]>([]);
   const navigation = useNavigation<NavigationProp<AppRoutes>>();
 
   async function get() {
+    showLoading();
     try {
       const response = await api.get('/cards');
       setCards(response.data);
     } catch (error) {
       console.error('Erro ao carregar cartões:', error);
+    } finally {
+       setTimeout(hideLoading, 2000); // Delay artificial de 500ms
     }
   }
 
@@ -37,10 +42,6 @@ export function CardsProvider({ children }: { children: ReactNode }) {
       console.error('Erro ao salvar cartão:', error);
     }
   }
-
-  useEffect(() => {
-    get();
-  }, []);
 
   return (
     <CardsContext.Provider value={{ cards, save, get }}>

@@ -4,7 +4,7 @@ import { RootStackParamList } from '@/src/routes';
 import { theme } from '@/src/theme/theme';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
 import { CardItem } from './components/card-item';
@@ -13,9 +13,14 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Cards'>;
 
 export function Cards() {
   const navigation = useNavigation<NavigationProp>();
-  const { cards } = useCards();
+  const { cards, get } = useCards();
   const selectedIndex = useSharedValue<number | null>(null);
   const [cardOrder, setCardOrder] = useState(cards.map((_, index) => index));
+
+  useEffect(() => {
+    get();
+  }, []);
+
 
   function moveCardToBack(fromIndex: number) {
     setCardOrder(prev => {

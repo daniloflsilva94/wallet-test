@@ -1,9 +1,10 @@
 import { Card } from '@/src/components/card';
+import { AppProvider } from '@/src/context';
 import { Card as CardDto } from '@/src/dto/card';
 import { fireEvent, waitFor } from '@testing-library/react-native';
 import React, { useEffect } from 'react';
 import { Button } from 'react-native';
-import { CardsProvider, useCards } from '../cards';
+import { useCards } from '../cards';
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({
@@ -68,9 +69,9 @@ const TestSaveComponent = () => {
 describe('Card Context', () => {
   it('should fetch cards and render names', async () => {
     const { getByText } = renderWithTheme(
-      <CardsProvider>
+      <AppProvider>
         <TestListComponent />
-      </CardsProvider>
+      </AppProvider>
     );
 
     await waitFor(() => {
@@ -80,9 +81,9 @@ describe('Card Context', () => {
 
   it('should add a new card using save()', async () => {
     const { getByText } = renderWithTheme(
-      <CardsProvider>
+      <AppProvider>
         <TestSaveComponent />
-      </CardsProvider>
+      </AppProvider>
     );
 
     const button = getByText('Salvar');
