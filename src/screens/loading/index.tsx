@@ -3,56 +3,80 @@ import { ShapeBottom, ShapeTop } from "@/src/styles/elements";
 import { theme } from "@/src/theme/theme";
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { useEffect } from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
-import {
+import { StyleSheet, View } from "react-native";
+import Animated, {
   Easing,
   useAnimatedStyle,
   useSharedValue,
   withSequence,
-  withTiming,
+  withTiming
 } from "react-native-reanimated";
 
-const { width, height } = Dimensions.get('window');
-
 export function Loading() {
-  const topScale = useSharedValue(0);
-  const bottomScale = useSharedValue(0);
+  const topX = useSharedValue(-200);
+  const topY = useSharedValue(-200);
+  const bottomX = useSharedValue(200);
+  const bottomY = useSharedValue(200);
 
-  useEffect(() => {
-    topScale.value = withSequence(
-      withTiming(1.2, { duration: 300, easing: Easing.out(Easing.exp) }),
-      withTiming(0.9, { duration: 150 }),
-      withTiming(1.05, { duration: 100 }),
-      withTiming(1, { duration: 100 })
+  const shake = (base: number) =>
+    withSequence(
+      withTiming(base - 10, { duration: 60 }),
+      withTiming(base + 10, { duration: 60 }),
+      withTiming(base - 6, { duration: 50 }),
+      withTiming(base + 6, { duration: 50 }),
+      withTiming(base, { duration: 50 })
     );
 
-    bottomScale.value = withSequence(
-      withTiming(1.2, { duration: 300, easing: Easing.out(Easing.exp) }),
-      withTiming(0.9, { duration: 150 }),
-      withTiming(1.05, { duration: 100 }),
-      withTiming(1, { duration: 100 })
+  useEffect(() => {
+    topX.value = withSequence(
+      withTiming(0, { duration: 100, easing: Easing.out(Easing.exp) }),
+      shake(0)
+    );
+    topY.value = withSequence(
+      withTiming(10, { duration: 100, easing: Easing.out(Easing.exp) }),
+      shake(10)
+    );
+
+    bottomX.value = withSequence(
+      withTiming(0, { duration: 100, easing: Easing.out(Easing.exp) }),
+    );
+    bottomY.value = withSequence(
+      withTiming(-10, { duration: 100, easing: Easing.out(Easing.exp) }),
+      withSequence(
+        withTiming(10, { duration: 60 }),
+        withTiming(-10, { duration: 60 }),
+        withTiming(6, { duration: 50 }),
+        withTiming(-6, { duration: 50 }),
+        withTiming(0, { duration: 50 }),
+      )
     );
   }, []);
 
   const topStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: topScale.value }],
+    transform: [
+      { translateY: topY.value },
+      { translateX: topX.value },
+    ],
   }));
 
   const bottomStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: bottomScale.value }],
+    transform: [
+      { translateX: bottomX.value },
+      { translateY: bottomY.value },
+    ],
   }));
 
   return (
     <Container style={styles.overlay}>
-      {/* <Animated.View style={topStyle}> */}
-      <ShapeTop />
-      {/* </Animated.View> */}
+      <Animated.View style={topStyle}>
+        <ShapeTop style={{ height: 500 }} />
+      </Animated.View>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <SimpleLineIcons name="wallet" size={100} color={theme?.colors?.green_light} />
+        <SimpleLineIcons name="wallet" size={80} color={theme?.colors?.green_light} />
       </View>
-      {/* <Animated.View style={bottomStyle}> */}
-      <ShapeBottom />
-      {/* </Animated.View> */}
+      <Animated.View style={bottomStyle}>
+        <ShapeBottom style={{ width: 500 }} />
+      </Animated.View>
     </Container>
   );
 }

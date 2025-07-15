@@ -32,6 +32,9 @@ export function Success() {
   const titleShakeValue = useSharedValue(0);
   const buttonShakeValue = useSharedValue(0);
 
+  const topShakeValue = useSharedValue(0);
+  const bottomShakeValue = useSharedValue(0);
+
   const titleShakeStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: titleShakeValue.value }],
@@ -44,6 +47,14 @@ export function Success() {
       transform: [{ translateY: buttonShakeValue.value }],
     };
   });
+
+  const topShakeStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: topShakeValue.value }],
+  }));
+
+  const bottomShakeStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: bottomShakeValue.value }],
+  }));
 
   useEffect(() => {
     titleShakeValue.value = withSequence(
@@ -61,11 +72,29 @@ export function Success() {
       withTiming(-6, { duration: 80 }),
       withTiming(0, { duration: 60 })
     );
+
+    topShakeValue.value = withSequence(
+      withTiming(-10, { duration: 100 }),
+      withTiming(10, { duration: 100 }),
+      withTiming(-6, { duration: 80 }),
+      withTiming(6, { duration: 80 }),
+      withTiming(0, { duration: 60 })
+    );
+
+    bottomShakeValue.value = withSequence(
+      withTiming(-10, { duration: 100 }),
+      withTiming(-10, { duration: 100 }),
+      withTiming(-6, { duration: 80 }),
+      withTiming(-6, { duration: 80 }),
+      withTiming(-0, { duration: 60 })
+    );
   }, []);
 
   return (
     <Container title="cadastro">
-      <ShapeTop />
+      <Animated.View style={topShakeStyle}>
+        <ShapeTop />
+      </Animated.View>
       <Content style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Animated.View style={titleShakeStyle}>
           <Text style={{ fontSize: theme.fontSizes.xxl, textAlign: "center" }}>Wallet Test</Text>
@@ -76,7 +105,9 @@ export function Success() {
           <Button label="avançar" onPress={() => navigation.navigate('Cards')} />
         </Animated.View>
       </Content>
-      <ShapeBottom />
+      <Animated.View style={bottomShakeStyle}>
+        <ShapeBottom />
+      </Animated.View>
     </Container>
   )
 }

@@ -22,7 +22,6 @@ type CardItemProps = {
 
 const { height } = Dimensions.get('window');
 const STACK_GAP = 60;
-const BOTTOM_Y = height - 470;
 
 export function CardItem({ data, index, order, selectedIndex, onCardReset }: CardItemProps) {
   const [selected, setSelected] = useState(false);
@@ -34,7 +33,6 @@ export function CardItem({ data, index, order, selectedIndex, onCardReset }: Car
     const isNotSelected = hasSelection && !isSelected;
 
     let y = STACK_GAP * order;
-    const dynamicBottomY = height / 2 - STACK_GAP;
     let opacity = 1;
     let zIndex = 100 + order;
 
