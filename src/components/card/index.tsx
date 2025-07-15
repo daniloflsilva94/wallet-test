@@ -12,12 +12,14 @@ type CardProps = {
 export function Card({ data, style }: CardProps) {
   if (!data) return null;
 
+  const isBlackCard: boolean = !!data?.type?.includes('Black') 
+
   return (
-    <CardContainer style={style}>
-      <Label>{data?.type}</Label>
-      <Name>{data?.name}</Name>
-      <Name>{maskCardNumber(data?.number)}</Name>
-      <Name>Validade {data?.expiry}</Name>
+    <CardContainer style={style} isBlackCard={isBlackCard}>
+      <Label isBlackCard={isBlackCard}>{data?.type}</Label>
+      <Name isBlackCard={isBlackCard}>{data?.name}</Name>
+      <Name isBlackCard={isBlackCard}>{maskCardNumber(data?.number)}</Name>
+      <Name isBlackCard={isBlackCard}>Validade {data?.expiry}</Name>
     </CardContainer>
   );
 }

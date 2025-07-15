@@ -6,7 +6,8 @@ export const theme = {
     white: '#ffffff',
     black: '#111111',
     grey_light: '#EEEEEE',
-    grey: '#BBBBBB'
+    grey: '#BBBBBB',
+    grey_dark: '#3F3F3F'
   },
   fonts: {
     regular: 'PTSansCaption_400Regular',

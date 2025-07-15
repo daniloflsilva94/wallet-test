@@ -2,6 +2,7 @@ import { Button } from "@/src/components/button";
 import { Container } from "@/src/components/container";
 import { Input } from "@/src/components/input";
 import { useCards } from "@/src/context/cards";
+import { Card } from "@/src/dto/card";
 import { Content, InputRow, ShapeBottom, ShapeTop, Text } from "@/src/styles/elements";
 import { theme } from "@/src/theme/theme";
 import { formatCardNumber, formatSecurityCode } from "@/src/utils/formatters/card";
@@ -11,12 +12,24 @@ import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 
 export function AddCard() {
-  const { save } = useCards();
+  const { save, checkCardType } = useCards();
 
+  const [type, setType] = useState<string | null>("Green Card");
   const [number, setNumber] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [expiry, setExpiry] = useState<string>("");
   const [cvv, setCvv] = useState<string>("");
+
+  useEffect(() => {
+    const fetchCardType = async () => {
+      const cleanNumber = number?.replace(/\D/g, '')
+      if (cleanNumber?.replace(/\D/g, '')?.length >= 6) {
+        const result = await checkCardType(cleanNumber)
+        setType(result ?? 'Green Card')
+      }
+    };
+    fetchCardType();
+  }, [number]);
 
   const shakeAnim = useSharedValue(0);
 
@@ -44,7 +57,8 @@ export function AddCard() {
   }
 
   function handleSubmit() {
-    const card = {
+    const card: Card = {
+      type,
       number,
       name,
       expiry,
