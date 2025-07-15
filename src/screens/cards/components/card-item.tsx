@@ -8,8 +8,7 @@ import { Dimensions, Pressable, View } from "react-native";
 import Animated, {
   runOnJS,
   SharedValue,
-  useAnimatedStyle,
-  withSequence,
+  useAnimatedStyle, useSharedValue, withSequence,
   withTiming
 } from 'react-native-reanimated';
 
@@ -23,10 +22,11 @@ type CardItemProps = {
 
 const { height } = Dimensions.get('window');
 const STACK_GAP = 60;
-const BOTTOM_Y = height - 350;
+const BOTTOM_Y = height - 470;
 
 export function CardItem({ data, index, order, selectedIndex, onCardReset }: CardItemProps) {
   const [selected, setSelected] = useState(false);
+  const cardHeight = useSharedValue(0);
 
   const animatedStyle = useAnimatedStyle(() => {
     const isSelected = selectedIndex.value === index;
@@ -34,6 +34,7 @@ export function CardItem({ data, index, order, selectedIndex, onCardReset }: Car
     const isNotSelected = hasSelection && !isSelected;
 
     let y = STACK_GAP * order;
+    const dynamicBottomY = height / 2 - STACK_GAP;
     let opacity = 1;
     let zIndex = 100 + order;
 
@@ -41,7 +42,8 @@ export function CardItem({ data, index, order, selectedIndex, onCardReset }: Car
       y = 0; // Move to top
       zIndex = 999;
     } else if (isNotSelected) {
-      y = BOTTOM_Y + STACK_GAP * order;
+      const CARD_OFFSET_Y = height * 0.52;
+      y = CARD_OFFSET_Y + STACK_GAP * (order - 1);
       opacity = 0.4;
       zIndex = 1;
     }
@@ -96,9 +98,14 @@ export function CardItem({ data, index, order, selectedIndex, onCardReset }: Car
             : 'none'
         }
       >
-        <View style={{ width: '100%' }}>
+        <View
+          style={{ width: '100%' }}
+          onLayout={(event) => {
+            cardHeight.value = event.nativeEvent.layout.height + 120;
+          }}
+        >
           <Card data={data} />
-          <View>
+          <View style={{ paddingVertical: 15 }}>
             {selected ?
               <Button label="pagar com este cartão" onPress={() => { }} /> :
               <Text style={{ fontSize: theme?.fontSizes?.xs, textAlign: 'center' }}>usar este cartão</Text>}

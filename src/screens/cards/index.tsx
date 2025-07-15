@@ -1,11 +1,12 @@
 import { Container } from '@/src/components/container';
 import { useCards } from '@/src/context/cards';
 import { RootStackParamList } from '@/src/routes';
+import { Text } from '@/src/styles/elements';
 import { theme } from '@/src/theme/theme';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
 import { CardItem } from './components/card-item';
 
@@ -15,11 +16,15 @@ export function Cards() {
   const navigation = useNavigation<NavigationProp>();
   const { cards, get } = useCards();
   const selectedIndex = useSharedValue<number | null>(null);
-  const [cardOrder, setCardOrder] = useState(cards.map((_, index) => index));
+  const [cardOrder, setCardOrder] = useState<number[]>([]);
 
   useEffect(() => {
     get();
   }, []);
+
+  useEffect(() => {
+    setCardOrder(cards.map((_, index) => index));
+  }, [cards]);
 
 
   function moveCardToBack(fromIndex: number) {
@@ -38,7 +43,7 @@ export function Cards() {
       onAdd={() => navigation.navigate('AddCard')}
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
-        {cardOrder?.length && cardOrder.map((cardIndex, visualIndex) => (
+        {cardOrder?.length ? cardOrder.map((cardIndex, visualIndex) => (
           <CardItem
             key={cardIndex}
             index={cardIndex}
@@ -47,7 +52,12 @@ export function Cards() {
             onCardReset={() => moveCardToBack(cardIndex)}
             data={cards[cardIndex]}
           />
-        ))}
+        )) : (
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+            <Text style={{ fontSize: theme?.fontSizes?.xs }}>não há cartões adicionados</Text>
+          </View>
+        )
+        }
       </ScrollView>
     </Container>
   );
