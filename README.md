@@ -50,6 +50,10 @@ yarn server
 
 Certifique-se de que o arquivo `db.json` esteja presente na raiz do projeto.
 
+⚠️ **Atenção:** Para que as requisições funcionem corretamente em dispositivos móveis, o `baseURL` da API **deve** ser atualizado com o IP **local da sua máquina** (por exemplo: `http://192.168.0.100:3333`).  
+**Importante:** o `localhost` **não funciona em dispositivos físicos**.  
+A porta utilizada pelo servidor mockado (`json-server`) é sempre `3333`.
+
 Após isso, você pode:
 
 - 📱 **Escanear o QR Code com o app [Expo Go](https://expo.dev/client)** no seu dispositivo físico
