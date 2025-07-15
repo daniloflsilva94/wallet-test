@@ -1,50 +1,113 @@
-# Welcome to your Expo app 👋
+# 💳 Wallet Test
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicação mobile para gerenciamento de cartões, desenvolvida com **React Native** e **Expo**, com foco em experiência animada, contexto global de dados e boas práticas de testes.
 
-## Get started
+## 📱 Funcionalidades
 
-1. Install dependencies
+- Visualização de uma pilha animada de cartões
+- Seleção de cartão com animação e botão de ação
+- Adição de novos cartões (mockado)
+- Contexto global com `React Context API`
+- Navegação entre telas com `React Navigation`
+- Testes unitários de componentes e contexto
+- Estilização com `styled-components`
+- Animações com `react-native-reanimated`
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 🚀 Como rodar o projeto
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### 1. Clone o repositório
 
 ```bash
-npm run reset-project
+git clone https://github.com/daniloflsilva94/wallet-test
+cd wallet-test
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Instale as dependências
 
-## Learn more
+```bash
+yarn install
+# ou
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 3. Inicie o projeto com Expo
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+yarn start
+```
 
-## Join the community
+### 4. Inicie o servidor de API mockada (json-server)
 
-Join our community of developers creating universal apps.
+A aplicação utiliza um servidor local para simular requisições de cartões.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+yarn server
+```
+
+> Rode este comando em um terminal separado do que está rodando o Expo (`yarn start`).
+
+Certifique-se de que o arquivo `db.json` esteja presente na raiz do projeto.
+
+Após isso, você pode:
+
+- 📱 **Escanear o QR Code com o app [Expo Go](https://expo.dev/client)** no seu dispositivo físico
+- 🖥️ **Rodar em um emulador Android/iOS** com os comandos abaixo:
+
+```bash
+yarn android
+# ou
+yarn ios
+```
+
+---
+
+## 🧪 Rodando os testes
+
+A aplicação possui testes unitários para componentes, contexto e funcionalidades de UI.
+
+```bash
+yarn test
+```
+
+Testes cobrem:
+
+- Componentes: `Input`, `Button`, `Card`, `Header`, `Container`
+- Contexto `CardsProvider`: funções `save` e `get`
+- Animações e interações da listagem dos `Cards`
+
+---
+
+## 🧱 Estrutura de pastas
+
+```
+src/
+├── components/       # Componentes reutilizáveis
+├── context/          # Contexto global
+├── dto/              # Tipagem de dados
+├── screens/          # Telas principais
+├── services/         # API
+├── styles/           # Estilos globais
+├── theme/            # Temas e fontes
+└── utils/            # Utilitários e test-utils
+```
+
+---
+
+## 🧠 Tecnologias e libs principais
+
+- **React Native** (via Expo)
+- **TypeScript**
+- **React Navigation**
+- **Styled Components**
+- **React Native Reanimated v2**
+- **Jest** + **@testing-library/react-native**
+- **Axios**
+- **Expo Google Fonts**
+
+---
+
+## 👨‍💻 Sobre o autor
+
+Desenvolvido por **Danilo Silva** — entre em contato pelo [LinkedIn](https://www.linkedin.com/in/danilo-flora-silva-4900b262/) ou veja mais projetos no [GitHub](https://github.com/daniloflsilva94).
