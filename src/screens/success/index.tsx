@@ -64,7 +64,7 @@ export function Success() {
   }, []);
 
   return (
-    <Container title="Cadastro">
+    <Container title="cadastro">
       <ShapeTop />
       <Content style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Animated.View style={titleShakeStyle}>
