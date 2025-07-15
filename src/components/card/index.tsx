@@ -10,6 +10,8 @@ type CardProps = {
 };
 
 export function Card({ data, style }: CardProps) {
+  if (!data) return null;
+
   return (
     <CardContainer style={style}>
       <Label>{data?.type}</Label>
