@@ -11,7 +11,6 @@ type HeaderProps = {
   screenName?: string;
 };
 
-
 export function Header({ title, backgroundColor, onAdd, screenName }: HeaderProps) {
   if (!title) return null;
 

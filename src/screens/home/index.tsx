@@ -6,7 +6,6 @@ import { theme } from "@/src/theme/theme";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 export function Home() {

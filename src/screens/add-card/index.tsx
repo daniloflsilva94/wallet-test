@@ -27,14 +27,14 @@ export function AddCard() {
   }
 
   function handleSubmit() {
-    const wallet = {
+    const card = {
       cardNumber,
       holder,
       expiry,
       cvv
     };
 
-    save(wallet);
+    save(card);
   }
 
   return (
