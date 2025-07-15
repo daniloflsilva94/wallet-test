@@ -7,8 +7,8 @@ import { CardItem } from '../card-item';
 
 const cardMock: Card = {
   id: '1',
-  holder: 'Danilo Silva',
-  cardNumber: '1234 5678 1234 5678',
+  name: 'Danilo Silva',
+  number: '1234 5678 1234 5678',
   expiry: '12/30',
   cvv: '123',
   type: 'Black Card',

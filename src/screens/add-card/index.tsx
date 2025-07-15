@@ -13,8 +13,8 @@ import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } 
 export function AddCard() {
   const { save } = useCards();
 
-  const [cardNumber, setCardNumber] = useState<string>("");
-  const [holder, setHolder] = useState<string>("");
+  const [number, setNumber] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [expiry, setExpiry] = useState<string>("");
   const [cvv, setCvv] = useState<string>("");
 
@@ -36,8 +36,8 @@ export function AddCard() {
 
   function isValidForm(): boolean {
     return (
-      cardNumber.replace(/\s/g, '').length === 16 &&
-      holder.length > 0 &&
+      number.replace(/\s/g, '').length === 16 &&
+      name.length > 0 &&
       expiry.replace(/\D/g, '').length === 4 &&
       cvv.length === 3
     );
@@ -45,8 +45,8 @@ export function AddCard() {
 
   function handleSubmit() {
     const card = {
-      cardNumber,
-      holder,
+      number,
+      name,
       expiry,
       cvv
     };
@@ -75,15 +75,15 @@ export function AddCard() {
             <Input
               label="número do cartão"
               placeholder=""
-              value={cardNumber}
-              onChangeText={(text) => setCardNumber(formatCardNumber(text))}
+              value={number}
+              onChangeText={(text) => setNumber(formatCardNumber(text))}
               keyboardType="number-pad"
               maxLength={19}
               inputMode="numeric"
               autoComplete="cc-number"
               textContentType="creditCardNumber"
             />
-            <Input label="nome do titular do cartão" value={holder} onChangeText={setHolder} />
+            <Input label="nome do titular do cartão" value={name} onChangeText={setName} />
             <InputRow>
               <Input
                 label="vencimento"

@@ -13,8 +13,8 @@ export function Card({ data, style }: CardProps) {
   return (
     <CardContainer style={style}>
       <Label>{data?.type}</Label>
-      <Name>{data?.holder}</Name>
-      <Name>{maskCardNumber(data?.cardNumber)}</Name>
+      <Name>{data?.name}</Name>
+      <Name>{maskCardNumber(data?.number)}</Name>
       <Name>Validade {data?.expiry}</Name>
     </CardContainer>
   );

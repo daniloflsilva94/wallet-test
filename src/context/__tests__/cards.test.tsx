@@ -15,8 +15,8 @@ jest.mock('@react-navigation/native', () => ({
 const cardMock: CardDto = {
   id: '1',
   type: 'Black Card',
-  cardNumber: '1234 5678 1234 5678',
-  holder: 'Danilo Silva',
+  number: '1234 5678 1234 5678',
+  name: 'Danilo Silva',
   expiry: '12/30',
   cvv: '123',
 };
@@ -24,8 +24,8 @@ const cardMock: CardDto = {
 const savedCard: CardDto = {
   id: '2',
   type: 'Gold Card',
-  cardNumber: '8765 4321 8765 4321',
-  holder: 'John Doe',
+  number: '8765 4321 8765 4321',
+  name: 'John Doe',
   expiry: '11/28',
   cvv: '321',
 };

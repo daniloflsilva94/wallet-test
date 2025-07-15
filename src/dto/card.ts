@@ -1,8 +1,8 @@
 export type Card = {
   id?: string;
   type?: string;
-  holder: string;
-  cardNumber: string;
+  name: string;
+  number: string;
   expiry: string;
   cvv: string;
 };
