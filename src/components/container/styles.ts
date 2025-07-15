@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const ContainerView = styled.SafeAreaView`
+export const ContainerView = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.blue_dark};
 `;

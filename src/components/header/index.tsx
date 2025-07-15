@@ -1,7 +1,7 @@
 import { theme } from "@/src/theme/theme";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
-import { TouchableOpacity, View } from "react-native";
+import { SafeAreaView, TouchableOpacity, View } from "react-native";
 import { ContainerHeader, ContainerTitle, ContentHeader, Label, TextHeader } from "./styles";
 
 type HeaderProps = {
@@ -19,20 +19,22 @@ export function Header({ title, backgroundColor, onAdd, screenName }: HeaderProp
   return (
     <>
       <ContainerHeader backgroundColor={backgroundColor}>
-        <ContentHeader>
-          <TouchableOpacity onPress={() => navigation.goBack()} testID="header-back-button">
-            <MaterialCommunityIcons name="arrow-left" size={26} color={theme.colors.blue_light} />
-          </TouchableOpacity>
-          <TextHeader backgroundColor={backgroundColor}>{title}</TextHeader>
-          {!!onAdd ? (
-            <TouchableOpacity onPress={onAdd} testID="header-add-button">
-              <MaterialCommunityIcons name="plus" size={26} color={theme.colors.blue_light} />
+        <SafeAreaView>
+          <ContentHeader>
+            <TouchableOpacity onPress={() => navigation.goBack()} testID="header-back-button">
+              <MaterialCommunityIcons name="arrow-left" size={26} color={theme.colors.blue_light} />
             </TouchableOpacity>
-          )
-            :
-            <View />
-          }
-        </ContentHeader>
+            <TextHeader backgroundColor={backgroundColor}>{title}</TextHeader>
+            {!!onAdd ? (
+              <TouchableOpacity onPress={onAdd} testID="header-add-button">
+                <MaterialCommunityIcons name="plus" size={26} color={theme.colors.blue_light} />
+              </TouchableOpacity>
+            )
+              :
+              <View />
+            }
+          </ContentHeader>
+        </SafeAreaView>
       </ContainerHeader>
       {backgroundColor && screenName && (
         <ContainerTitle>
