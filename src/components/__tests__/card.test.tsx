@@ -4,7 +4,7 @@ import React from 'react';
 import { Card } from '../card';
 
 describe('Card', () => {
-  it('deve renderizar os dados do cartão', () => {
+  it('should render card data correctly', () => {
     const cardMock = {
       id: '123',
       type: 'Black Card',

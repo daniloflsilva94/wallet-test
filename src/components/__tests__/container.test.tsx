@@ -5,7 +5,7 @@ import React from 'react';
 import { Container } from '../container';
 
 describe('Container', () => {
-  it('deve renderizar o título no Header', () => {
+  it('should render the title in the Header', () => {
     const { getByText } = renderWithTheme(
       <Container title="Página de Teste">
         <>{<Text>Conteúdo do container</Text>}</>
@@ -15,7 +15,7 @@ describe('Container', () => {
     expect(getByText('Página de Teste')).toBeTruthy();
   });
 
-  it('deve renderizar os children corretamente', () => {
+  it('should render the children correctly', () => {
     const { getByText } = renderWithTheme(
       <Container>
         <>{<Text>Conteúdo de teste</Text>}</>
@@ -25,7 +25,7 @@ describe('Container', () => {
     expect(getByText('Conteúdo de teste')).toBeTruthy();
   });
 
-  it('deve chamar a função onAdd se for clicado no botão do Header', () => {
+  it('should call onAdd function when the Header button is clicked', () => {
     const onAddMock = jest.fn();
 
     const { getByTestId } = renderWithTheme(

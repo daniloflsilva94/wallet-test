@@ -14,12 +14,12 @@ jest.mock('@react-navigation/native', () => {
 });
 
 describe('Header', () => {
-  it('deve renderizar o título corretamente', () => {
+  it('should render the title correctly', () => {
     const { getByText } = renderWithTheme(<Header title="Página de Teste" />);
     expect(getByText('Página de Teste')).toBeTruthy();
   });
 
-  it('deve renderizar o botão de voltar e chamar goBack ao clicar', () => {
+  it('should render the back button and call goBack on press', () => {
     const goBackMock = jest.fn();
     jest.spyOn(require('@react-navigation/native'), 'useNavigation').mockReturnValue({
       goBack: goBackMock,
@@ -31,7 +31,7 @@ describe('Header', () => {
     expect(goBackMock).toHaveBeenCalled();
   });
 
-  it('deve chamar a função onAdd quando clicar no botão de adicionar', () => {
+  it('should call onAdd function when the add button is pressed', () => {
     const onAddMock = jest.fn();
     const { getByTestId } = renderWithTheme(
       <Header title="Com botão" onAdd={onAddMock} />
@@ -42,14 +42,14 @@ describe('Header', () => {
     expect(onAddMock).toHaveBeenCalled();
   });
 
-  it('deve renderizar o screenName quando fornecido', () => {
+  it('should render the screenName when provided', () => {
     const { getByText } = renderWithTheme(
       <Header title="Teste" screenName="Minha Tela" backgroundColor="#fff" />
     );
     expect(getByText('Minha Tela')).toBeTruthy();
   });
 
-  it('não deve renderizar se o título não for fornecido', () => {
+  it('should not render if the title is not provided', () => {
     const { toJSON } = renderWithTheme(<Header />);
     expect(toJSON()).toBeNull();
   });

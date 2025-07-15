@@ -66,7 +66,7 @@ const TestSaveComponent = () => {
 };
 
 describe('Card Context', () => {
-  it('deve buscar cartões e renderizar nomes', async () => {
+  it('should fetch cards and render names', async () => {
     const { getByText } = renderWithTheme(
       <CardsProvider>
         <TestListComponent />
@@ -78,7 +78,7 @@ describe('Card Context', () => {
     });
   });
 
-  it('deve adicionar novo cartão com save()', async () => {
+  it('should add a new card using save()', async () => {
     const { getByText } = renderWithTheme(
       <CardsProvider>
         <TestSaveComponent />

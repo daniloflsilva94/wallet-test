@@ -4,12 +4,12 @@ import React from 'react';
 import { Input } from '../input';
 
 describe('Input', () => {
-  it('deve renderizar o label corretamente', () => {
+  it('should render the label correctly', () => {
     const { getByText } = renderWithTheme(<Input label="Nome" />);
     expect(getByText('Nome')).toBeTruthy();
   });
 
-  it('deve chamar onChangeText quando digitar', () => {
+  it('should call onChangeText when typing', () => {
     const onChangeTextMock = jest.fn();
     const { getByPlaceholderText } = renderWithTheme(
       <Input placeholder="Nome" onChangeText={onChangeTextMock} />
