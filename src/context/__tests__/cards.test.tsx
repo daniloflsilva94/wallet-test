@@ -3,7 +3,7 @@ import { Card as CardDto } from '@/src/dto/card';
 import { fireEvent, waitFor } from '@testing-library/react-native';
 import React, { useEffect } from 'react';
 import { Button } from 'react-native';
-import { CardProvider, useCards } from '../cards';
+import { CardsProvider, useCards } from '../cards';
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({
@@ -24,7 +24,7 @@ const savedCard: CardDto = {
   id: '2',
   type: 'Gold Card',
   cardNumber: '8765 4321 8765 4321',
-  holder: 'Novo Usuário',
+  holder: 'John Doe',
   expiry: '11/28',
   cvv: '321',
 };
@@ -68,9 +68,9 @@ const TestSaveComponent = () => {
 describe('Card Context', () => {
   it('deve buscar cartões e renderizar nomes', async () => {
     const { getByText } = renderWithTheme(
-      <CardProvider>
+      <CardsProvider>
         <TestListComponent />
-      </CardProvider>
+      </CardsProvider>
     );
 
     await waitFor(() => {
@@ -80,16 +80,16 @@ describe('Card Context', () => {
 
   it('deve adicionar novo cartão com save()', async () => {
     const { getByText } = renderWithTheme(
-      <CardProvider>
+      <CardsProvider>
         <TestSaveComponent />
-      </CardProvider>
+      </CardsProvider>
     );
 
     const button = getByText('Salvar');
     fireEvent.press(button);
 
     await waitFor(() => {
-      expect(getByText('Novo Usuário')).toBeTruthy();
+      expect(getByText('John Doe')).toBeTruthy();
     });
   });
 });
