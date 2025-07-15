@@ -9,7 +9,7 @@ import { formatExpiryDate } from "@/src/utils/formatters/date";
 import { useState } from "react";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 
-export function RegisterWallet() {
+export function AddCard() {
   const { save } = useCards();
 
   const [cardNumber, setCardNumber] = useState<string>("");

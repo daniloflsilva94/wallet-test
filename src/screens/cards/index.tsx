@@ -30,7 +30,7 @@ export function Cards() {
       title="Wallet Test"
       screenName="Meus cartões"
       backgroundColor={theme.colors.white}
-      onAdd={() => navigation.navigate('RegisterWallet')}
+      onAdd={() => navigation.navigate('AddCard')}
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
         {cardOrder?.length && cardOrder.map((cardIndex, visualIndex) => (
