@@ -1,7 +1,7 @@
 import { Button } from "@/src/components/button";
 import { Card } from "@/src/components/card";
 import { Container } from "@/src/components/container";
-import { Wallet } from "@/src/dto/wallet";
+import { Card as CardDto } from "@/src/dto/card";
 import { RootStackParamList } from "@/src/routes";
 import { Content, ShapeBottom, ShapeTop, Text } from "@/src/styles/elements";
 import { theme } from "@/src/theme/theme";
@@ -10,7 +10,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type RouteParams = {
   Success: {
-    card: Wallet;
+    card: CardDto;
   };
 };
 
@@ -29,7 +29,7 @@ export function Success() {
         <Text style={{ fontSize: theme.fontSizes.xxl }}>Wallet Test</Text>
         <Text>Cartão cadastrado com sucesso</Text>
         <Card data={card} style={{ margin: 40 }} />
-        <Button label="avançar" onPress={() => navigation.navigate('WalletList')} />
+        <Button label="avançar" onPress={() => navigation.navigate('Cards')} />
       </Content>
       <ShapeBottom />
     </Container>

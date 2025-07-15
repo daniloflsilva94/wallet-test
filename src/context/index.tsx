@@ -1,9 +1,9 @@
-import { WalletProvider } from "./wallet";
+import { CardsProvider } from "./cards";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   return (
-    <WalletProvider>
+    <CardsProvider>
       {children}
-    </WalletProvider>
+    </CardsProvider>
   );
 }

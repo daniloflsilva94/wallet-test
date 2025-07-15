@@ -17,7 +17,7 @@ export function Home() {
       <ShapeTop />
       <Content style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text style={{ marginBottom: 20, fontSize: theme.fontSizes.xxl }}>Wallet Test</Text>
-        <Button label="meus cartões" onPress={() => navigation.navigate('WalletList')} />
+        <Button label="meus cartões" onPress={() => navigation.navigate('Cards')} />
         <Button variant="secondary" label="cadastrar cartão" onPress={() => navigation.navigate('RegisterWallet')} />
       </Content>
       <ShapeBottom />

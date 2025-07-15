@@ -1,9 +1,9 @@
 import { Card } from '@/src/components/card';
-import { Wallet } from '@/src/dto/wallet';
+import { Card as CardDto } from '@/src/dto/card';
 import { fireEvent, waitFor } from '@testing-library/react-native';
 import React, { useEffect } from 'react';
 import { Button } from 'react-native';
-import { useWallets, WalletProvider } from '../wallet';
+import { CardProvider, useCards } from '../cards';
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({
@@ -11,7 +11,7 @@ jest.mock('@react-navigation/native', () => ({
   }),
 }));
 
-const cardMock: Wallet = {
+const cardMock: CardDto = {
   id: '1',
   type: 'Black Card',
   cardNumber: '1234 5678 1234 5678',
@@ -20,7 +20,7 @@ const cardMock: Wallet = {
   cvv: '123',
 };
 
-const savedCard: Wallet = {
+const savedCard: CardDto = {
   id: '2',
   type: 'Gold Card',
   cardNumber: '8765 4321 8765 4321',
@@ -37,7 +37,7 @@ jest.mock('../../services/api', () => ({
 }));
 
 const TestListComponent = () => {
-  const { cards, get } = useWallets();
+  const { cards, get } = useCards();
 
   useEffect(() => {
     get();
@@ -45,7 +45,7 @@ const TestListComponent = () => {
 
   return (
     <>
-      {cards.map((card: Wallet) => (
+      {cards.map((card: CardDto) => (
         <Card key={card.id} data={card} />
       ))}
     </>
@@ -53,24 +53,24 @@ const TestListComponent = () => {
 };
 
 const TestSaveComponent = () => {
-  const { cards, save } = useWallets();
+  const { cards, save } = useCards();
 
   return (
     <>
       <Button title="Salvar" onPress={() => save(savedCard)} />
-      {cards.map((card: Wallet) => (
+      {cards.map((card: CardDto) => (
         <Card key={card.id} data={card} />
       ))}
     </>
   );
 };
 
-describe('Wallet Context', () => {
+describe('Card Context', () => {
   it('deve buscar cartões e renderizar nomes', async () => {
     const { getByText } = renderWithTheme(
-      <WalletProvider>
+      <CardProvider>
         <TestListComponent />
-      </WalletProvider>
+      </CardProvider>
     );
 
     await waitFor(() => {
@@ -80,9 +80,9 @@ describe('Wallet Context', () => {
 
   it('deve adicionar novo cartão com save()', async () => {
     const { getByText } = renderWithTheme(
-      <WalletProvider>
+      <CardProvider>
         <TestSaveComponent />
-      </WalletProvider>
+      </CardProvider>
     );
 
     const button = getByText('Salvar');

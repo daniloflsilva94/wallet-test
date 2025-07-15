@@ -1,4 +1,4 @@
-export type Wallet = {
+export type Card = {
   id?: string;
   type?: string;
   holder: string;

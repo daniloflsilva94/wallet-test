@@ -1,22 +1,22 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { Wallet } from "../dto/wallet";
+import { Card } from "../dto/card";
 import { api } from "../services/api";
 
 type AppRoutes = {
-  'Success': { card: Wallet };
+  'Success': { card: Card };
 };
 
-interface WalletsContextProps {
-  cards: Wallet[];
-  save: (card: Wallet) => Promise<void>;
+interface CardsContextProps {
+  cards: Card[];
+  save: (card: Card) => Promise<void>;
   get: () => Promise<void>;
 }
 
-const WalletsContext = createContext<WalletsContextProps | undefined>(undefined);
+const CardsContext = createContext<CardsContextProps | undefined>(undefined);
 
-export function WalletProvider({ children }: { children: ReactNode }) {
-  const [cards, setCards] = useState<Wallet[]>([]);
+export function CardsProvider({ children }: { children: ReactNode }) {
+  const [cards, setCards] = useState<Card[]>([]);
   const navigation = useNavigation<NavigationProp<AppRoutes>>();
 
   async function get() {
@@ -28,7 +28,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  async function save(card: Wallet) {
+  async function save(card: Card) {
     try {
       const response = await api.post('/cards', card);
       setCards(prev => [...prev, response.data]);
@@ -43,17 +43,17 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <WalletsContext.Provider value={{ cards, save, get }}>
+    <CardsContext.Provider value={{ cards, save, get }}>
       {children}
-    </WalletsContext.Provider>
+    </CardsContext.Provider>
   );
 }
 
-export function useWallets() {
-  const context = useContext(WalletsContext);
+export function useCards() {
+  const context = useContext(CardsContext);
 
   if (!context) {
-    throw new Error('useWallets must be used within a WalletProvider');
+    throw new Error('useCards must be used within a CardProvider');
   }
 
   return context;

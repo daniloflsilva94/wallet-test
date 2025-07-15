@@ -1,7 +1,7 @@
 import { Button } from "@/src/components/button";
 import { Container } from "@/src/components/container";
 import { Input } from "@/src/components/input";
-import { useWallets } from "@/src/context/wallet";
+import { useCards } from "@/src/context/cards";
 import { Content, InputRow, ShapeBottom, ShapeTop, Text } from "@/src/styles/elements";
 import { theme } from "@/src/theme/theme";
 import { formatCardNumber, formatSecurityCode } from "@/src/utils/formatters/card";
@@ -10,7 +10,7 @@ import { useState } from "react";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 
 export function RegisterWallet() {
-  const { save } = useWallets();
+  const { save } = useCards();
 
   const [cardNumber, setCardNumber] = useState<string>("");
   const [holder, setHolder] = useState<string>("");
